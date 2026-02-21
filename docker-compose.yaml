@@ -38,14 +38,14 @@ services:
     ports:
       - "9104:9104"
 
-  prometheus:
+   prometheus:
     image: prom/prometheus
     container_name: prometheus
     restart: always
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus:/etc/prometheus
     ports:
       - "9090:9090"
-
 volumes:
   mysql_data:
+
