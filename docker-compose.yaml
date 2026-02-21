@@ -7,12 +7,23 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: sunny
-      MYSQL_ROOT_USER: root
       MYSQL_DATABASE: testdb
     ports:
       - "7070:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    depends_on:
+      - mydb
+    environment:
+      PMA_HOST: mydb
+      PMA_PORT: 3306
+    ports:
+      - "8081:80"
 
 volumes:
   mysql_data:
