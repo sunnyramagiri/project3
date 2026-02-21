@@ -1,26 +1,11 @@
 version: '3.8'
 
 services:
-  mydb:
-    image: mysql:8
-    container_name: mysql-db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: sunny
-      MYSQL_DATABASE: testdb
-      MYSQL_USER: sunny
-      MYSQL_PASSWORD: sunny123
-    ports:
-      - "7070:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
     restart: always
-    depends_on:
-      - mydb
     environment:
       PMA_HOST: mydb
       PMA_PORT: 3306
@@ -31,14 +16,12 @@ services:
     image: prom/mysqld-exporter
     container_name: mysql-exporter
     restart: always
-    depends_on:
-      - mydb
     environment:
       DATA_SOURCE_NAME: "root:sunny@(mydb:3306)/"
     ports:
       - "9104:9104"
 
-   prometheus:
+  prometheus:
     image: prom/prometheus
     container_name: prometheus
     restart: always
@@ -46,6 +29,3 @@ services:
       - ./prometheus:/etc/prometheus
     ports:
       - "9090:9090"
-volumes:
-  mysql_data:
-
