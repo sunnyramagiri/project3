@@ -1,8 +1,8 @@
-FROM openjdk:17-alpine
+FROM maven:3.9.6-eclipse-temurin-17
 
-WORKDIR /home/  
+WORKDIR /app
+COPY . .
 
-RUN apt install maven
+RUN mvn clean install
 
-EXPOSE 33060
-
+CMD ["java", "-jar", "target/your-app.jar"]
