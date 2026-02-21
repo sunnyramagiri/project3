@@ -1,12 +1,18 @@
 version: '3.8'
+
 services:
   mydb:
-    image: mysql
+    image: mysql:8
+    container_name: mysql-db
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD: sunny
-        MYSQL_ROOT_USER: sunny
+      MYSQL_ROOT_PASSWORD: sunny
+      MYSQL_ROOT_USER: root
+      MYSQL_DATABASE: testdb
     ports:
-      - 7070:3306=value
+      - "7070:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
 
-      
+volumes:
+  mysql_data:
