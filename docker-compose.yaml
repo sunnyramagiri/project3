@@ -22,11 +22,10 @@ services:
       - "9104:9104"
 
   prometheus:
-  image: prom/prometheus
-  container_name: prometheus
-  restart: always
-  volumes:
-    - ./prometheus:/etc/prometheus
-  ports:
-    - "9090:9090"
-
+    image: prom/prometheus
+    container_name: prometheus
+    restart: always
+    volumes:
+      - ./prometheus:/etc/prometheus
+    ports:
+      - "9090:9090"
