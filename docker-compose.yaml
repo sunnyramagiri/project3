@@ -25,5 +25,25 @@ services:
     ports:
       - "8081:80"
 
+  mysql-exporter:
+    image: prom/mysqld-exporter
+    container_name: mysql-exporter
+    restart: always
+    environment:
+      DATA_SOURCE_NAME: "root:sunny@(mydb:3306)/"
+    depends_on:
+      - mydb
+    ports:
+      - "9104:9104"
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    restart: always
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
 volumes:
   mysql_data:
