@@ -8,6 +8,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: sunny
       MYSQL_DATABASE: testdb
+      MYSQL_USER: sunny
+      MYSQL_PASSWORD: sunny123
     ports:
       - "7070:3306"
     volumes:
@@ -29,10 +31,10 @@ services:
     image: prom/mysqld-exporter
     container_name: mysql-exporter
     restart: always
-    environment:
-      DATA_SOURCE_NAME: "root:sunny@(mydb:3306)/"
     depends_on:
       - mydb
+    environment:
+      DATA_SOURCE_NAME: "root:sunny@(mydb:3306)/"
     ports:
       - "9104:9104"
 
