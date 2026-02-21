@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  mydb:
+    image: mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD: sunny
+        MYSQL_ROOT_USER: sunny
+    ports:
+      - 7070:3306=value
+
+      
